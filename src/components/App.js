@@ -1,16 +1,28 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Sidebar from "../components/layout/Sidebar";
 import Header from "../components/layout/Header";
+import Wallet from "../components/Wallet";
 
 const App = () => {
   return (
-    <div>
-      <Sidebar />
-      <div className="main-container">
-        <Header />
-      </div>
-    </div>
+    <React.Fragment>
+      <BrowserRouter>
+        <Sidebar />
+        <div className="main-container">
+          <Header />
+          <Switch>
+            {/* Change '/' route to landing page, and the rest accordingly */}
+            <Route exact path="/markets/open" component={Wallet} />
+            <Route exact path="/" component={Wallet} />
+            <Route exact path="/markets/new" component={Wallet} />
+            <Route exact path="/:account/markets" component={Wallet} />
+            <Route exact path="/wallet" component={Wallet} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </React.Fragment>
   );
 };
 

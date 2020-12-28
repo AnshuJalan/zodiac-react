@@ -1,21 +1,22 @@
 import React from "react";
-import { connect } from "react-redux";
-import { connectWallet } from "../../actions";
 import { Button } from "@material-ui/core";
 
 const Header = ({ connectWallet }) => {
   return (
-    <div>
-      <Button className="float-right" variant="outlined" color="primary" onClick={connectWallet}>
-        Connect Thanos Wallet
-      </Button>
+    <div
+      style={{
+        position: "absolute",
+        left: "156px",
+        top: "18px",
+        fontWeight: "600",
+        fontSize: "20px",
+      }}
+    >
+      WALLET SETTINGS
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    wallet: state.wallet,
-  };
-};
 
-export default connect(mapStateToProps, { connectWallet })(Header);
+//const headerStyle;
+
+export default Header;

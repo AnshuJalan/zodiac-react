@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="42.404182mm"
-   height="29.053362mm"
-   viewBox="0 0 42.404182 29.053362"
+   width="134.99487mm"
+   height="34.395832mm"
+   viewBox="0 0 134.99487 34.395832"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="brand.svg">
+   sodipodi:docname="brand1.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="70.408784"
-     inkscape:cy="11.431589"
+     inkscape:zoom="0.70000001"
+     inkscape:cx="118.56031"
+     inkscape:cy="47.477356"
      inkscape:document-units="mm"
      inkscape:current-layer="g825"
      showgrid="false"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,30 +56,51 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-107.39502,-118.98937)">
+     transform="translate(39.645024,-111.38414)">
     <g
        id="g825"
        transform="matrix(3.2971454,0,0,3.1545508,1319.8459,-304.03367)">
       <g
-         id="g833">
-        <rect
-           style="opacity:0.91300001;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.98712462;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-           id="rect819"
-           width="6.9575548"
-           height="6.9575548"
-           x="-160.09364"
-           y="352.28601"
-           ry="1.9457576"
-           transform="rotate(45.334246)" />
-        <rect
-           transform="rotate(45.334246)"
-           ry="1.9457576"
-           y="349.68942"
-           x="-157.52718"
-           height="6.9575548"
-           width="6.9575548"
-           id="rect821"
-           style="opacity:0.91300001;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.98712462;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         id="g834">
+        <g
+           transform="translate(-44.596167,-1.5640906)"
+           id="g833">
+          <rect
+             transform="rotate(45.334246)"
+             ry="1.9457576"
+             y="352.28601"
+             x="-160.09364"
+             height="6.9575548"
+             width="6.9575548"
+             id="rect819"
+             style="opacity:0.91300001;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.98712462;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+          <rect
+             style="opacity:0.91300001;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.98712462;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+             id="rect821"
+             width="6.9575548"
+             height="6.9575548"
+             x="-157.52718"
+             y="349.68942"
+             ry="1.9457576"
+             transform="rotate(45.334246)" />
+        </g>
+        <path
+           inkscape:connector-curvature="0"
+           id="path821"
+           d="m -397.27847,131.68842 v 10.90356"
+           style="fill:none;stroke:#000000;stroke-width:0.57828379;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           transform="scale(0.97813698,1.0223517)"
+           id="text825"
+           y="137.0088"
+           x="-404.14362"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.87582207px;line-height:1.25;font-family:'Leelawadee UI';-inkscape-font-specification:'Leelawadee UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.03100717;stroke-miterlimit:4;stroke-dasharray:none"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.87582207px;font-family:'Leelawadee UI';-inkscape-font-specification:'Leelawadee UI, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.03100717;stroke-miterlimit:4;stroke-dasharray:none"
+             y="137.0088"
+             x="-404.14362"
+             id="tspan823"
+             sodipodi:role="line">Zodiac</tspan></text>
       </g>
     </g>
   </g>
