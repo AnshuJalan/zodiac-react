@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import { Button, Grid, TextField } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Button, Grid, TextField, CircularProgress } from "@material-ui/core";
+import IPFS from "nano-ipfs-store";
+import { loadMainContract } from "../actions";
 
 function validateUrl(value) {
   return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
@@ -7,15 +10,55 @@ function validateUrl(value) {
   );
 }
 
-const MarketCreate = () => {
-  const [title, setTitle] = useState();
-  const [resolution, setResolution] = useState();
-  const [additional, setAdditional] = useState();
+const ipfs = IPFS.at("https://ipfs.infura.io:5001");
+
+const MarketCreate = ({
+  main,
+  isWalletConnected,
+  loadMainContract,
+  history,
+}) => {
+  useEffect(() => {
+    if (isWalletConnected && !main) loadMainContract();
+  }, [isWalletConnected, main, loadMainContract]);
+
+  const [title, setTitle] = useState("");
+  const [resolution, setResolution] = useState("");
+  const [additional, setAdditional] = useState("");
+  const [dateTime, setDateTime] = useState("");
   const [errorTitle, setErrorTitle] = useState("");
   const [errorLink, setErrorLink] = useState("");
+  const [errorDateTime, setErrorDateTime] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!validate()) return;
+
+    const data = {
+      title,
+      resolution,
+      additional,
+    };
+
+    setLoading(true);
+    try {
+      const hash = await ipfs.add(JSON.stringify(data));
+      await createMarket({
+        endTime: new Date(dateTime) / 1000,
+        ipfsString: hash,
+      });
+    } catch (err) {
+      alert(err.message);
+      setLoading(false);
+    }
+  };
+
+  const createMarket = async ({ endTime, ipfsString }) => {
+    const operation = await main.methods
+      .createMarket(endTime, ipfsString)
+      .send({});
+    await operation.confirmation();
+    history.push("/markets/account");
   };
 
   const validate = () => {
@@ -27,6 +70,16 @@ const MarketCreate = () => {
 
     if (!title || !resolution) return false;
 
+    if (!dateTime) {
+      setErrorDateTime("Date must be entered!");
+      return false;
+    }
+
+    if (dateTime < Date.now()) {
+      setErrorDateTime("Date must not be in the past!");
+      return false;
+    }
+
     if (!validateUrl(resolution)) {
       setErrorLink("Resolution must be a valid HTTP link!");
       return false;
@@ -34,35 +87,67 @@ const MarketCreate = () => {
     return true;
   };
 
+  if (!isWalletConnected) {
+    return (
+      <div className="column-flex">
+        Thanos Wallet is not connected. Please go to wallet settings and connect
+        Thanos.
+      </div>
+    );
+  } else if (!main) {
+    return (
+      <div className="column-flex">
+        <CircularProgress color="primary" />
+      </div>
+    );
+  }
+
   return (
     <div className="column-flex">
       <div style={formBackgroundStyle}>
-        <Grid container direction="column" spacing={3}>
-          <Grid item>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
             <TextField
-              error={errorTitle}
+              error={errorTitle !== ""}
               variant="outlined"
               helperText={errorTitle}
               fullWidth
               label="Title / Question"
               required
               value={title}
+              InputLabelProps={{ shrink: true }}
               onChange={(e) => setTitle(e.target.value)}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
             <TextField
-              error={errorLink}
+              error={errorLink !== ""}
               helperText={errorLink}
               variant="outlined"
-              fullWidth
               label="Resolution Source (Website Link)"
               required
+              fullWidth
               value={resolution}
               onChange={(e) => setResolution(e.target.value)}
+              InputLabelProps={{ shrink: true }}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
+            <TextField
+              error={errorDateTime !== ""}
+              helperText={errorDateTime}
+              variant="outlined"
+              label="Next appointment"
+              type="datetime-local"
+              required
+              fullWidth
+              value={dateTime}
+              onChange={(e) => setDateTime(e.target.value)}
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+
+          <Grid item sm={12}>
             <TextField
               variant="outlined"
               fullWidth
@@ -71,6 +156,7 @@ const MarketCreate = () => {
               rows={10}
               value={additional}
               onChange={(e) => setAdditional(e.target.value)}
+              InputLabelProps={{ shrink: true }}
             />
           </Grid>
           <Grid item>
@@ -80,7 +166,16 @@ const MarketCreate = () => {
               color="primary"
               size="large"
             >
-              Create Market
+              {loading ? (
+                <>
+                  <CircularProgress size={18} color="primary" />
+                  <span style={{ marginLeft: "5px" }}>
+                    Confirming Transaction
+                  </span>
+                </>
+              ) : (
+                "Create Market"
+              )}
             </Button>
           </Grid>
         </Grid>
@@ -98,4 +193,11 @@ const formBackgroundStyle = {
   boxShadow: "0px 1px 7px -2px #828282",
 };
 
-export default MarketCreate;
+const mapStateToProps = (state) => {
+  return {
+    main: state.contracts.main,
+    isWalletConnected: state.wallet.connected,
+  };
+};
+
+export default connect(mapStateToProps, { loadMainContract })(MarketCreate);
