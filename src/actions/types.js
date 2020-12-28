@@ -1,0 +1,2 @@
+export const CONNECT_WALLET = "CONNECT_WALLET";
+export const LOAD_CONTRACT = "LOAD_CONTRACT";
