@@ -4,7 +4,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Sidebar from "../components/layout/Sidebar";
 import Header from "../components/layout/Header";
 import Wallet from "../components/Wallet";
-import OpenMarkets from "../components/OpenMarkets";
+import MarketsOpen from "./MarketsOpen";
+import MarketCreate from "./MarketCreate";
 
 const App = () => {
   return (
@@ -16,8 +17,8 @@ const App = () => {
           <Switch>
             {/* Change '/' route to landing page, and the rest accordingly */}
             <Route exact path="/" component={Wallet} />
-            <Route exact path="/markets/open" component={OpenMarkets} />
-            <Route exact path="/markets/new" component={Wallet} />
+            <Route exact path="/markets/open" component={MarketsOpen} />
+            <Route exact path="/markets/new" component={MarketCreate} />
             <Route exact path="/markets/account" component={Wallet} />
             <Route exact path="/wallet" component={Wallet} />
           </Switch>
