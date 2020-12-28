@@ -1,4 +1,4 @@
-import { CONNECT_WALLET } from "./types";
+import { CONNECT_WALLET, LOAD_MAIN_CONTRACT, LOAD_MARKETS } from "./types";
 import { ThanosWallet } from "@thanos-wallet/dapp";
 
 export const connectWallet = () => async (dispatch) => {
@@ -7,7 +7,6 @@ export const connectWallet = () => async (dispatch) => {
   const tezos = wallet.toTezos();
   const accountPkh = await tezos.wallet.pkh();
   const accountBalance = await tezos.tz.getBalance(accountPkh);
-  console.log("Hello world");
   dispatch({
     type: CONNECT_WALLET,
     payload: {
@@ -27,3 +26,26 @@ export const connectWallet = () => async (dispatch) => {
 //     payload: priceBettingInstance,
 //   });
 // };
+
+export const loadMainContract = () => async (dispatch, getState) => {
+  const tezos = getState().wallet.tezos;
+  const mainInstance = await tezos.wallet.at(
+    process.env.REACT_APP_MAIN_CONTRACT
+  );
+
+  dispatch({
+    type: LOAD_MAIN_CONTRACT,
+    payload: mainInstance,
+  });
+};
+
+export const loadMarkets = () => async (dispatch, getState) => {
+  const mainContract = getState().contracts.main;
+  const mainStorage = await mainContract.storage();
+  const { markets } = mainStorage;
+
+  dispatch({
+    type: LOAD_MARKETS,
+    payload: markets,
+  });
+};

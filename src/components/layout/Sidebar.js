@@ -1,10 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./Sidebar.css";
 
+const types = {
+  CREATE: "/markets/new",
+  MARKETS: "/markets/open",
+  ADMIN: "/markets/account",
+  WALLET: "/wallet",
+};
+
 const SideBar = () => {
   const [selected, changeSelected] = useState("store");
+
+  const url = useLocation().pathname;
+  if (url !== selected) {
+    changeSelected(url);
+  }
 
   return (
     <div className="sidebar">
@@ -16,9 +28,9 @@ const SideBar = () => {
       <div className="sidebar-icons">
         <Link to="/markets/new">
           <div
-            onClick={() => changeSelected("add_box")}
+            onClick={() => changeSelected(types.CREATE)}
             className={`icon-wrapper ${
-              selected === "add_box" ? "selected" : ""
+              selected === types.CREATE ? "selected" : ""
             }`}
           >
             <span className="material-icons">add_box</span>
@@ -27,17 +39,21 @@ const SideBar = () => {
 
         <Link to="/markets/open">
           <div
-            onClick={() => changeSelected("store")}
-            className={`icon-wrapper ${selected === "store" ? "selected" : ""}`}
+            onClick={() => changeSelected(types.MARKETS)}
+            className={`icon-wrapper ${
+              selected === types.MARKETS ? "selected" : ""
+            }`}
           >
             <span className="material-icons">store</span>
           </div>
         </Link>
 
-        <Link to="/account/markets">
+        <Link to="/markets/account">
           <div
-            onClick={() => changeSelected("admin")}
-            className={`icon-wrapper ${selected === "admin" ? "selected" : ""}`}
+            onClick={() => changeSelected(types.ADMIN)}
+            className={`icon-wrapper ${
+              selected === types.ADMIN ? "selected" : ""
+            }`}
           >
             <span className="material-icons">admin_panel_settings</span>
           </div>
@@ -45,9 +61,9 @@ const SideBar = () => {
 
         <Link to="/wallet">
           <div
-            onClick={() => changeSelected("wallet")}
+            onClick={() => changeSelected(types.WALLET)}
             className={`icon-wrapper ${
-              selected === "wallet" ? "selected" : ""
+              selected === types.WALLET ? "selected" : ""
             }`}
           >
             <span className="material-icons">account_balance_wallet</span>
