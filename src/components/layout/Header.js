@@ -1,22 +1,24 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
-const Header = ({ connectWallet }) => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: "156px",
-        top: "18px",
-        fontWeight: "600",
-        fontSize: "20px",
-      }}
-    >
-      WALLET SETTINGS
-    </div>
-  );
+const Header = () => {
+  const location = useLocation();
+  function getHeading() {
+    if (location.pathname === "/wallet") return "WALLET SETTINGS";
+    else if (location.pathname === "/markets/open") return "OPEN MARKETS";
+    else if (location.pathname === "/markets/new") return "CREATE NEW MARKET";
+    else return "YOUR MARKETS";
+  }
+
+  return <div style={headerStyle}>{getHeading()}</div>;
 };
 
-//const headerStyle;
+const headerStyle = {
+  position: "absolute",
+  left: "156px",
+  top: "18px",
+  fontWeight: "600",
+  fontSize: "20px",
+};
 
 export default Header;
