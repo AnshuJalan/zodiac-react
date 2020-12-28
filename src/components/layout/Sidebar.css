@@ -6,41 +6,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #ececec;
-  padding-top: 12px;
+  background-color: #ffffff;
+  padding-top: 18px;
 }
 
 .sidebar-icons {
   text-align: center;
+  width: 100%;
+  padding-bottom: 18px;
+}
+
+.icon-wrapper:hover,
+.selected.icon-wrapper {
+  border-right: #202020 3px solid;
+  cursor: pointer;
 }
 
 .material-icons {
   font-size: 42px;
-  display: block;
-  position: relative;
+  transition: transform 0.2s;
   margin-bottom: 12px;
   color: #999999;
+  margin: 10px 0px;
 }
 
-.material-icons:hover {
-  font-size: 46px;
+.icon-wrapper:hover .material-icons,
+.selected .material-icons {
+  transform: scale(1.1);
   color: #202020;
-}
-
-.tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  color: #ffffffe8;
-  background-color: #202020e8;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-}
-
-.material-icons:hover .tooltiptext {
-  visibility: visible;
 }

@@ -1,21 +1,24 @@
 import React from "react";
-import { connect } from "react-redux";
-import { connectWallet } from "../../actions";
-import { Button } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
-const Header = ({ connectWallet }) => {
-  return (
-    <div>
-      <Button className="float-right" variant="outlined" color="primary" onClick={connectWallet}>
-        Connect Thanos Wallet
-      </Button>
-    </div>
-  );
-};
-const mapStateToProps = (state) => {
-  return {
-    wallet: state.wallet,
-  };
+const Header = () => {
+  const location = useLocation();
+  function getHeading() {
+    if (location.pathname === "/wallet") return "WALLET SETTINGS";
+    else if (location.pathname === "/markets/open") return "OPEN MARKETS";
+    else if (location.pathname === "/markets/new") return "CREATE NEW MARKET";
+    else return "YOUR MARKETS";
+  }
+
+  return <div style={headerStyle}>{getHeading()}</div>;
 };
 
-export default connect(mapStateToProps, { connectWallet })(Header);
+const headerStyle = {
+  position: "absolute",
+  left: "156px",
+  top: "18px",
+  fontWeight: "600",
+  fontSize: "20px",
+};
+
+export default Header;
