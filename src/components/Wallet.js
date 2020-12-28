@@ -16,7 +16,12 @@ const Wallet = ({ connectWallet }) => {
       </Button>
       <span style={linkTextStyle}>
         To know more about Thanos, check the offical{" "}
-        <a color="primary" href="https://thanoswallet.com/" target="_blank">
+        <a
+          color="primary"
+          href="https://thanoswallet.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
           website
         </a>{" "}
         <span style={{ fontSize: "13px" }} className="material-icons">
