@@ -3,7 +3,6 @@ body {
   height: 100%;
   width: 100%;
   margin: 0px;
-  background-color: #f3f5f8;
   font-family: "Roboto", sans-serif;
   color: #202020;
 }
@@ -13,6 +12,7 @@ body {
 }
 
 .main-container {
+  background-color: #f3f5f8;
   padding-left: 156px;
   padding-right: 26px;
   height: 100%;

@@ -18,6 +18,10 @@ const SideBar = () => {
     changeSelected(url);
   }
 
+  if (url === "/") {
+    return <React.Fragment></React.Fragment>;
+  }
+
   return (
     <div className="sidebar">
       <img

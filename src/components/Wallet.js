@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import { connectWallet } from "../actions";
-import Card from "./Cards/WalletCard";
+import Card from "./Cards/walletCard";
 
 const Wallet = ({ wallet, connectWallet }) => {
   if (wallet.connected) {
