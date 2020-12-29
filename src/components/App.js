@@ -7,6 +7,7 @@ import LandingPage from "../components/LandingPage";
 import Wallet from "../components/Wallet";
 import MarketsOpen from "./MarketsOpen";
 import MarketCreate from "./MarketCreate";
+import MainContainer from "./layout/MainContainer";
 
 const App = () => {
   return (
@@ -15,14 +16,14 @@ const App = () => {
         <Sidebar />
         <Header />
         <Route exact path="/" component={LandingPage} />
-        <div className="main-container">
+        <MainContainer className="main-container">
           <Switch>
             <Route exact path="/markets/open" component={MarketsOpen} />
             <Route exact path="/markets/new" component={MarketCreate} />
             <Route exact path="/markets/account" component={Wallet} />
             <Route exact path="/wallet" component={Wallet} />
           </Switch>
-        </div>
+        </MainContainer>
       </BrowserRouter>
     </React.Fragment>
   );
