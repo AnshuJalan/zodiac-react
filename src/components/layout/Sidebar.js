@@ -6,12 +6,13 @@ import "./Sidebar.css";
 const types = {
   CREATE: "/markets/new",
   MARKETS: "/markets/open",
+  MARKET: "/market/show",
   ADMIN: "/markets/account",
   WALLET: "/wallet",
 };
 
 const SideBar = () => {
-  const [selected, changeSelected] = useState("store");
+  const [selected, changeSelected] = useState();
 
   const url = useLocation().pathname;
   if (url !== selected) {
@@ -45,7 +46,9 @@ const SideBar = () => {
           <div
             onClick={() => changeSelected(types.MARKETS)}
             className={`icon-wrapper ${
-              selected === types.MARKETS ? "selected" : ""
+              selected === types.MARKETS || selected === types.MARKET
+                ? "selected"
+                : ""
             }`}
           >
             <span className="material-icons">store</span>

@@ -3,6 +3,7 @@ import { LOAD_MARKETS_ACCOUNT } from "../actions/types";
 const INITIAL_STATE = {
   market: null,
   marketsAccount: [],
+  marketLoading: true,
 };
 
 //eslint-disable-next-line

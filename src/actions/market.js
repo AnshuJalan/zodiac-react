@@ -11,7 +11,7 @@ export const loadMarketsAccount = () => async (dispatch, getState) => {
 
   let marketsConfigured = [];
   for (var entry of [...markets.entries()]) {
-    if (entry[1] == account) {
+    if (entry[1] === account) {
       const instance = await getState().wallet.tezos.wallet.at(entry[0]);
       const storage = await instance.storage();
       const data = JSON.parse(await ipfs.cat(storage.infoIPFS));

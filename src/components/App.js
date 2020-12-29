@@ -8,6 +8,7 @@ import Wallet from "../components/Wallet";
 import MarketsOpen from "./MarketsOpen";
 import MarketCreate from "./MarketCreate";
 import MainContainer from "./layout/MainContainer";
+import MarketShow from "./MarketShow";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Switch>
             <Route exact path="/markets/open" component={MarketsOpen} />
             <Route exact path="/markets/new" component={MarketCreate} />
+            <Route exact path="/market/show" component={MarketShow} />
             <Route exact path="/markets/account" component={Wallet} />
             <Route exact path="/wallet" component={Wallet} />
           </Switch>
