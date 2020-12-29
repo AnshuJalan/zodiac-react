@@ -5,6 +5,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import Key from '@material-ui/icons/VpnKey';
+import Divider from '@material-ui/core/Divider';
 
 
 const useStyles = makeStyles({
@@ -17,7 +20,7 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: 15,
   },
   pos: {
     marginBottom: 12,
@@ -32,12 +35,13 @@ export default function SimpleCard({wallet ,connect}) {
         <Card className={classes.root} >
             <CardContent>
                 <Typography className={classes.title} color="black" gutterBottom>
-                    Your Public Key Hash :<br/>{wallet.accountPkh}
+                    <Key /> : {wallet.accountPkh}
                 </Typography>
                 <Typography className={classes.title} color="black" gutterBottom>
-                    Balance : {wallet.accountBalance.toNumber()}
+                    <AccountBalanceIcon /> : {wallet.accountBalance.toNumber()}
                 </Typography>
             </CardContent>
+            <Divider light/>
             <CardActions>
                 <Button style={{margin:"auto"}} size="small" variant="outlined" color="primary" onClick={connect}>Switch Account</Button>
             </CardActions>
