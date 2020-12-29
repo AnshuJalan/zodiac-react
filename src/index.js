@@ -6,6 +6,7 @@ import Thunk from "redux-thunk";
 
 import "./index.css";
 import App from "./components/App";
+// import Land from './components/LandingPage';
 import reducers from "./reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

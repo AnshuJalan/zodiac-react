@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Grid } from "@material-ui/core";
 import { connect } from "react-redux";
+import MarketCard from "../components/Cards/MarketCard";
 import { loadMainContract, loadMarkets } from "../actions";
 
 const OpenMarket = (props) => {
   const { isWalletConnected, loadMainContract, loadMarkets } = props;
   const main = props?.contracts.main;
+  const marketsLoading = props.contracts.loading;
 
   useEffect(() => {
     if (isWalletConnected) {
       if (!main) {
         loadMainContract();
-      } else {
+      } else if (marketsLoading) {
         loadMarkets();
       }
     }
-  }, [loadMainContract, isWalletConnected, main, loadMarkets]);
+  }, [loadMainContract, isWalletConnected, main, loadMarkets, marketsLoading]);
 
   if (!isWalletConnected) {
     return (
@@ -30,13 +32,23 @@ const OpenMarket = (props) => {
         <CircularProgress color="primary" />
       </div>
     );
-  } else {
-    return props.contracts.markets.size === 0 ? (
-      <div className="column-flex">No markets are available.</div>
-    ) : (
-      <></>
-    );
+  } else if (props.contracts.markets.size === 0) {
+    <div className="column-flex">No markets are available.</div>;
   }
+
+  return (
+    <div style={{ justifyContent: "flex-start" }} className="column-flex">
+      <Grid container spacing={1}>
+        {props.contracts.markets.map((market, index) => {
+          return (
+            <Grid key={index} item sm={6}>
+              <MarketCard market={market} />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {

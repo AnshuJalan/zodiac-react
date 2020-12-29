@@ -1,5 +1,6 @@
 import { CONNECT_WALLET, LOAD_MAIN_CONTRACT, LOAD_MARKETS } from "./types";
 import { ThanosWallet } from "@thanos-wallet/dapp";
+import IPFS from "nano-ipfs-store";
 
 export const connectWallet = () => async (dispatch) => {
   const wallet = new ThanosWallet("Dapp Wallet");
@@ -15,17 +16,7 @@ export const connectWallet = () => async (dispatch) => {
       accountBalance,
     },
   });
-  //mountContracts(dispatch, tezos);
 };
-// const mountContracts = async (dispatch, tezos) => {
-//   const priceBettingInstance = await tezos.wallet.at(
-//     process.env.REACT_APP_CONTRACT | "KT1TkQpyAP6Q4mHdB8W3ouiEXKrHTkvwdEDZ"
-//   );
-//   dispatch({
-//     type: LOAD_CONTRACT,
-//     payload: priceBettingInstance,
-//   });
-// };
 
 export const loadMainContract = () => async (dispatch, getState) => {
   const tezos = getState().wallet.tezos;
@@ -44,8 +35,22 @@ export const loadMarkets = () => async (dispatch, getState) => {
   const mainStorage = await mainContract.storage();
   const { markets } = mainStorage;
 
+  const ipfs = IPFS.at("https://ipfs.infura.io:5001");
+
+  let marketsConfigured = [];
+  for (var entry of [...markets.entries()]) {
+    const instance = await getState().wallet.tezos.wallet.at(entry[0]);
+    const storage = await instance.storage();
+    const data = JSON.parse(await ipfs.cat(storage.infoIPFS));
+    marketsConfigured.push({
+      address: entry[0],
+      creator: entry[1],
+      ...data,
+    });
+  }
+
   dispatch({
     type: LOAD_MARKETS,
-    payload: markets,
+    payload: marketsConfigured,
   });
 };
