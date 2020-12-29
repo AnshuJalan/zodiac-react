@@ -1,1 +1,1 @@
-export { connectWallet } from "./connect";
+export { connectWallet, loadMainContract, loadMarkets } from "./connect";

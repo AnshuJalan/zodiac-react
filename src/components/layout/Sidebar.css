@@ -8,6 +8,7 @@
   justify-content: space-between;
   background-color: #ffffff;
   padding-top: 18px;
+  box-shadow: 0px 0px 5px -2px #828282;
 }
 
 .sidebar-icons {
