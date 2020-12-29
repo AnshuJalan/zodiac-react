@@ -6,5 +6,4 @@ const MarketAccount = () => {
       <AccountCard />  
     );
 }
-
 export default MarketAccount;

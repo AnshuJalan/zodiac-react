@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
 import {
   Select,
   FormControl,
   MenuItem,
   InputLabel,
-  TextField,
   Grid,
   Card,
   CardContent,
-  CardActions,
   Typography,
   Button,
 } from "@material-ui/core";
-import { SettingsInputAntenna } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {

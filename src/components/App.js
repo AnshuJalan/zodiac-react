@@ -19,6 +19,7 @@ const App = () => {
         <Route exact path="/" component={LandingPage} />
         <MainContainer>
           <Switch>
+            
             <Route exact path="/markets/open" component={MarketsOpen} />
             <Route exact path="/markets/new" component={MarketCreate} />
             <Route exact path="/markets/account" component={MarketAccount} />
