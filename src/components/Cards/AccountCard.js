@@ -37,15 +37,15 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const AccountCard = () => {
-  //const [hovering, setHovering] = useState(false);
+  const [hovering, setHovering] = useState(false);
   const [age,setage] = useState('');
 
-  //const { address, title } = props.market;
+//   const { address, title } = props.market;
 
   const classes = useStyles(); 
   return (
       <div className="column-flex">
-        <Card>
+        <Card raised={hovering} onMouseOver={()=>{setHovering(true)}} onMouseOut={()=>{setHovering(false)}}>
             <CardContent>
                 <Grid container spacing={3}>
                     <Grid item xs={8}>
