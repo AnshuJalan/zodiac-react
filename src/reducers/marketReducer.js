@@ -1,4 +1,8 @@
-import { LOAD_MARKETS_ACCOUNT } from "../actions/types";
+import {
+  LOAD_MARKETS_ACCOUNT,
+  LOAD_MARKET_SHOW,
+  CLEAR_LOADED_MARKET,
+} from "../actions/types";
 
 const INITIAL_STATE = {
   market: null,
@@ -13,6 +17,18 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         marketsAccount: action.payload,
+      };
+    case LOAD_MARKET_SHOW:
+      return {
+        ...state,
+        market: action.payload,
+        marketLoading: false,
+      };
+    case CLEAR_LOADED_MARKET:
+      return {
+        ...state,
+        market: null,
+        marketLoading: true,
       };
     default:
       return state;

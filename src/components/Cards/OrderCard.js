@@ -14,6 +14,7 @@ const OrderCard = () => {
         >
           <span style={itemSpan}>
             <img
+              alt="icon"
               src={process.env.PUBLIC_URL + "/images/tz-icon.png"}
               width="20"
             />
@@ -23,7 +24,7 @@ const OrderCard = () => {
           <span style={{ ...itemSpan, marginRight: "200px" }}>
             <span
               style={{ fontSize: 20, color: "black" }}
-              class="material-icons"
+              className="material-icons"
             >
               local_mall
             </span>

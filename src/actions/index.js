@@ -1,2 +1,2 @@
 export { connectWallet, loadMainContract, loadMarkets } from "./connect";
-export { loadMarketsAccount } from "./market";
+export { loadMarketsAccount, loadMarketShow } from "./market";

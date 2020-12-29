@@ -45,7 +45,17 @@ const MarketCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button className={classes.action} variant="outlined" color="primary">
+        <Button
+          onClick={() =>
+            props.history.push({
+              pathname: "/market/show",
+              address,
+            })
+          }
+          className={classes.action}
+          variant="outlined"
+          color="primary"
+        >
           TRADE
         </Button>
       </CardActions>
