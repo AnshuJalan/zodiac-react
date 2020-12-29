@@ -194,7 +194,7 @@ const MarketCreate = ({
 };
 
 const formBackgroundStyle = {
-  width: "100%",
+  width: "calc(100% - 48px)",
   padding: "26px",
   margin: "0px 20px",
   backgroundColor: "#ffffff",
