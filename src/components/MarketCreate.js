@@ -3,6 +3,12 @@ import { connect } from "react-redux";
 import { Button, Grid, TextField, CircularProgress } from "@material-ui/core";
 import IPFS from "nano-ipfs-store";
 import { loadMainContract } from "../actions";
+// import BasicDateTimePicker from "./layout/DateTimePicker";
+import MomentUtils from '@date-io/moment';
+import {
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 
 function validateUrl(value) {
   return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
@@ -25,7 +31,7 @@ const MarketCreate = ({
   const [title, setTitle] = useState("");
   const [resolution, setResolution] = useState("");
   const [additional, setAdditional] = useState("");
-  const [dateTime, setDateTime] = useState("");
+  const [dateTime, handleClearedDateChange] = useState(null);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorLink, setErrorLink] = useState("");
   const [errorDateTime, setErrorDateTime] = useState("");
@@ -115,12 +121,13 @@ const MarketCreate = ({
               label="Title / Question"
               required
               value={title}
-              InputLabelProps={{ shrink: true }}
+              // InputLabelProps={{ shrink: true }}
               onChange={(e) => setTitle(e.target.value)}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item>
             <TextField
+              style={{width:"60vw"}}
               error={errorLink !== ""}
               helperText={errorLink}
               variant="outlined"
@@ -129,22 +136,24 @@ const MarketCreate = ({
               fullWidth
               value={resolution}
               onChange={(e) => setResolution(e.target.value)}
-              InputLabelProps={{ shrink: true }}
+              // InputLabelProps={{ shrink: true }}
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              error={errorDateTime !== ""}
-              helperText={errorDateTime}
-              variant="outlined"
-              label="Next appointment"
-              type="datetime-local"
-              required
-              fullWidth
-              value={dateTime}
-              onChange={(e) => setDateTime(e.target.value)}
-              InputLabelProps={{ shrink: true }}
-            />
+          <Grid item>
+            <MuiPickersUtilsProvider utils={MomentUtils} >
+              <DateTimePicker
+                error={errorDateTime !== ""}
+                style={{width: "23vw"}}
+                label="Next Appointment"
+                inputVariant="outlined"
+                disablePast
+                clearable
+                value={dateTime}
+                onChange={handleClearedDateChange}
+                showTodayButton
+                required
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
 
           <Grid item sm={12}>
@@ -156,7 +165,7 @@ const MarketCreate = ({
               rows={10}
               value={additional}
               onChange={(e) => setAdditional(e.target.value)}
-              InputLabelProps={{ shrink: true }}
+              // InputLabelProps={{ shrink: true }}
             />
           </Grid>
           <Grid item>
