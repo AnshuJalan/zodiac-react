@@ -2,15 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import { connectWallet } from "../actions";
-import Card from "./Cards/walletCard"
+import Card from "./Cards/WalletCard";
 
-const Wallet = ({ wallet , connectWallet }) => {
-  console.log(wallet);
-  if(wallet.connected){
-    return (
-      <Card wallet={wallet} connect={connectWallet}/>
-    );
-  }else{
+const Wallet = ({ wallet, connectWallet }) => {
+  if (wallet.connected) {
+    return <Card wallet={wallet} connect={connectWallet} />;
+  } else {
     return (
       <div className="column-flex">
         <Button
