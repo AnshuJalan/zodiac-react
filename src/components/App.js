@@ -16,7 +16,7 @@ const App = () => {
         <Sidebar />
         <Header />
         <Route exact path="/" component={LandingPage} />
-        <MainContainer className="main-container">
+        <MainContainer>
           <Switch>
             <Route exact path="/markets/open" component={MarketsOpen} />
             <Route exact path="/markets/new" component={MarketCreate} />
