@@ -6,6 +6,7 @@ const Header = () => {
   function getHeading() {
     if (location.pathname === "/wallet") return "WALLET SETTINGS";
     else if (location.pathname === "/markets/open") return "OPEN MARKETS";
+    else if (location.pathname === "/market/show") return "OPEN MARKETS";
     else if (location.pathname === "/markets/new") return "CREATE NEW MARKET";
     else if (location.pathname === "/markets/account") return "YOUR MARKETS";
     else return "";

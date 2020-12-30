@@ -2,9 +2,16 @@ import { CONNECT_WALLET, LOAD_MAIN_CONTRACT, LOAD_MARKETS } from "./types";
 import { ThanosWallet } from "@thanos-wallet/dapp";
 import IPFS from "nano-ipfs-store";
 
-export const connectWallet = () => async (dispatch) => {
+export const connectWallet = (permission) => async (dispatch) => {
+  if (!ThanosWallet.isAvailable) {
+    alert(
+      "Thanos Wallet not installed! Please install Thanos Wallet to use this dapp"
+    );
+    return;
+  }
+
   const wallet = new ThanosWallet("Dapp Wallet");
-  await wallet.connect("delphinet", { forcePermission: true });
+  await wallet.connect("delphinet", { forcePermission: permission });
   const tezos = wallet.toTezos();
   const accountPkh = await tezos.wallet.pkh();
   const accountBalance = await tezos.tz.getBalance(accountPkh);

@@ -137,7 +137,8 @@ const MarketCreate = ({
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DateTimePicker
                 error={errorDateTime !== ""}
-                label="Next Appointment"
+                helperText={errorDateTime}
+                label="End Time"
                 fullWidth
                 inputVariant="outlined"
                 disablePast

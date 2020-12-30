@@ -13,7 +13,7 @@ const OpenMarket = (props) => {
     if (isWalletConnected) {
       if (!main) {
         loadMainContract();
-      } else if (marketsLoading) {
+      } else {
         loadMarkets();
       }
     }
@@ -42,7 +42,7 @@ const OpenMarket = (props) => {
         {props.contracts.markets.map((market, index) => {
           return (
             <Grid key={index} item sm={6}>
-              <MarketCard market={market} />
+              <MarketCard market={market} history={props.history} />
             </Grid>
           );
         })}
