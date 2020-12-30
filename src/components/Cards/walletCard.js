@@ -61,7 +61,7 @@ export default function SimpleCard({ wallet, connect }) {
             fullWidth
             variant="outlined"
             color="primary"
-            onClick={connect}
+            onClick={() => connect(true)}
           >
             Switch Account
           </Button>

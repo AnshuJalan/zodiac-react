@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Sidebar from "../components/layout/Sidebar";
@@ -10,8 +11,13 @@ import MarketCreate from "./MarketCreate";
 import MarketAccount from "./MarketAccount";
 import MainContainer from "./layout/MainContainer";
 import MarketShow from "./MarketShow";
+import { connectWallet } from "../actions";
 
-const App = () => {
+const App = ({ connectWallet }) => {
+  useEffect(() => {
+    connectWallet(false);
+  }, [connectWallet]);
+
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -32,4 +38,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(null, { connectWallet })(App);

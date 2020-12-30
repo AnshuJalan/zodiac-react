@@ -14,7 +14,7 @@ const Wallet = ({ wallet, connectWallet }) => {
           size="large"
           variant="outlined"
           color="primary"
-          onClick={connectWallet}
+          onClick={() => connectWallet(true)}
         >
           Connect Thanos Wallet
         </Button>
