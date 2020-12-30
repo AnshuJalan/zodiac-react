@@ -65,12 +65,12 @@ export const loadMarketShow = (address) => async (dispatch, getState) => {
 
   let sharesShort = [];
   if (storage.sharesShort.has(account)) {
-    sharesShort = [...storage.sharesShort.get(account)];
+    sharesShort = [...storage.sharesShort.get(account).entries()];
   }
 
   let sharesLong = [];
   if (storage.sharesLong.has(account)) {
-    sharesLong = [...storage.sharesLong.get(account)];
+    sharesLong = [...storage.sharesLong.get(account).entries()];
   }
 
   const data = {

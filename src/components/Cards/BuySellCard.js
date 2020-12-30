@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import OrderCard from "./OrderCard";
+import { loadMarketShow } from "../../actions";
 
 const BuySellCard = (props) => {
   const [position, setPosition] = useState(0);
@@ -72,7 +73,7 @@ const BuySellCard = (props) => {
           amount: quantity * price,
         });
       await operation.confirmation();
-      //Load portfolio
+      props.loadMarketShow(address);
     } catch (err) {
       alert(err.message);
     }
@@ -88,7 +89,7 @@ const BuySellCard = (props) => {
           amount: quantity * price,
         });
       await operation.confirmation();
-      //Load portfolio
+      props.loadMarketShow(address);
     } catch (err) {
       alert(err.message);
     }
@@ -102,7 +103,7 @@ const BuySellCard = (props) => {
         .sellLong(buyPrice * 1000000, price * 1000000, quantity * 10)
         .send();
       await operation.confirmation();
-      //Load portfolio
+      props.loadMarketShow(address);
     } catch (err) {
       alert(err.message);
     }
@@ -116,11 +117,96 @@ const BuySellCard = (props) => {
         .sellShort(buyPrice * 1000000, price * 1000000, quantity * 10)
         .send();
       await operation.confirmation();
-      //Load portfolio
+      props.loadMarketShow(address);
     } catch (err) {
       alert(err.message);
     }
     setLoading(false);
+  };
+
+  const noOrders = (
+    <p style={{ fontWeight: "lighter", paddingTop: 50, textAlign: "center" }}>
+      No orders available to take.
+    </p>
+  );
+
+  const { buyLongOrders } = props.market;
+  const showBuyLongOrders = buyLongOrders.length ? (
+    <>
+      {buyLongOrders.map((order, index) => (
+        <OrderCard
+          key={index}
+          price={order.price.toNumber() / 1000000}
+          quantity={order.quantity.toNumber() / 10}
+          setPrice={setPrice}
+          setQuantity={setQuantity}
+          setPosition={() => setPosition(1)}
+        />
+      ))}
+    </>
+  ) : (
+    noOrders
+  );
+
+  const { buyShortOrders } = props.market;
+  const showBuyShortOrders = buyShortOrders.length ? (
+    <>
+      {buyShortOrders.map((order, index) => (
+        <OrderCard
+          key={index}
+          price={order.price.toNumber() / 1000000}
+          quantity={order.quantity.toNumber() / 10}
+          setPrice={setPrice}
+          setQuantity={setQuantity}
+          setPosition={() => setPosition(0)}
+        />
+      ))}
+    </>
+  ) : (
+    noOrders
+  );
+
+  const { sellLongOrders } = props.market;
+  const showSellLongOrders = sellLongOrders.length ? (
+    <>
+      {sellLongOrders.map((order, index) => (
+        <OrderCard
+          key={index}
+          price={order.price.toNumber() / 1000000}
+          quantity={order.quantity.toNumber() / 10}
+          setPrice={setPrice}
+          setQuantity={setQuantity}
+          setPosition={() => setPosition(1)}
+        />
+      ))}
+    </>
+  ) : (
+    noOrders
+  );
+
+  const { sellShortOrders } = props.market;
+  const showSellShortOrders = sellShortOrders.length ? (
+    <>
+      {sellShortOrders.map((order, index) => (
+        <OrderCard
+          key={index}
+          price={order.price.toNumber() / 1000000}
+          quantity={order.quantity.toNumber() / 10}
+          setPrice={setPrice}
+          setQuantity={setQuantity}
+          setPosition={() => setPosition(0)}
+        />
+      ))}
+    </>
+  ) : (
+    noOrders
+  );
+
+  const getOrders = () => {
+    if (position === 0 && type === 0) return showBuyLongOrders;
+    else if (position === 1 && type === 0) return showBuyShortOrders;
+    else if (position === 0 && type === 1) return showSellLongOrders;
+    else return showSellShortOrders;
   };
 
   const onSubmit = () => {
@@ -161,10 +247,7 @@ const BuySellCard = (props) => {
       <CardContent style={{ height: "calc(100vh - 296px)" }}>
         {renderButtons()}
         <br />
-        <div style={{ height: "65%", overflowY: "auto" }}>
-          <OrderCard />
-          <OrderCard />
-        </div>
+        <div style={{ height: "65%", overflowY: "auto" }}>{getOrders()}</div>
         <br />
         <Grid container spacing={1}>
           {type === 0 ? (
@@ -286,4 +369,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(BuySellCard);
+export default connect(mapStateToProps, { loadMarketShow })(BuySellCard);

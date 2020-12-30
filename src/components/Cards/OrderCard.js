@@ -1,7 +1,13 @@
 import React from "react";
 import { Card, CardContent, Button } from "@material-ui/core";
 
-const OrderCard = () => {
+const OrderCard = (props) => {
+  const takeOrder = () => {
+    props.setPrice((1 - props.price).toFixed(1));
+    props.setQuantity(props.quantity);
+    props.setPosition();
+  };
+
   return (
     <Card
       style={{ margin: 5, boxShadow: "none", border: "1px solid #00000060" }}
@@ -20,7 +26,9 @@ const OrderCard = () => {
               src={process.env.PUBLIC_URL + "/images/tz-icon.png"}
               width="20"
             />
-            <span style={{ fontWeight: "bold", marginLeft: 10 }}>0.8</span>
+            <span style={{ fontWeight: "bold", marginLeft: 10 }}>
+              {props.price}
+            </span>
           </span>
 
           <span style={{ ...itemSpan, marginRight: "200px" }}>
@@ -31,9 +39,13 @@ const OrderCard = () => {
               local_mall
             </span>
 
-            <span style={{ fontWeight: "bold", marginLeft: 10 }}>1.7</span>
+            <span style={{ fontWeight: "bold", marginLeft: 10 }}>
+              {props.quantity}
+            </span>
           </span>
-          <Button color="primary">Take</Button>
+          <Button onClick={() => takeOrder()} color="primary">
+            Take
+          </Button>
         </div>
       </CardContent>
     </Card>
