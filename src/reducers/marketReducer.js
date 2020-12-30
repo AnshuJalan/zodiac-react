@@ -5,7 +5,7 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  market: null,
+  market: {},
   marketsAccount: [],
   marketLoading: true,
 };
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     case CLEAR_LOADED_MARKET:
       return {
         ...state,
-        market: null,
+        market: {},
         marketLoading: true,
       };
     default:

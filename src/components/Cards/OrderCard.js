@@ -3,7 +3,9 @@ import { Card, CardContent, Button } from "@material-ui/core";
 
 const OrderCard = () => {
   return (
-    <Card style={{ margin: 5 }}>
+    <Card
+      style={{ margin: 5, boxShadow: "none", border: "1px solid #00000060" }}
+    >
       <CardContent style={{ padding: "4px 16px" }}>
         <div
           style={{

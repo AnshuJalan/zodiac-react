@@ -44,19 +44,23 @@ export const loadMarketShow = (address) => async (dispatch, getState) => {
 
   const buyLongOrders = getResults(
     [...storage.buyLongOrders.keys()],
-    storage.orders
+    storage.orders,
+    account
   );
   const buyShortOrders = getResults(
     [...storage.buyShortOrders.keys()],
-    storage.orders
+    storage.orders,
+    account
   );
   const sellLongOrders = getResults(
     [...storage.sellLongOrders.keys()],
-    storage.orders
+    storage.orders,
+    account
   );
   const sellShortOrders = getResults(
     [...storage.sellShortOrders.keys()],
-    storage.orders
+    storage.orders,
+    account
   );
 
   let sharesShort = [];
@@ -71,6 +75,7 @@ export const loadMarketShow = (address) => async (dispatch, getState) => {
 
   const data = {
     instance,
+    address,
     buyLongOrders,
     buyShortOrders,
     sellShortOrders,
@@ -88,10 +93,11 @@ export const loadMarketShow = (address) => async (dispatch, getState) => {
   });
 };
 
-function getResults(arr, orders) {
+function getResults(arr, orders, account) {
   let result = [];
   for (let a of arr) {
-    result.push(orders.get(a));
+    const res = orders.get(a);
+    if (res.creator !== account) result.push(res);
   }
   return result;
 }
