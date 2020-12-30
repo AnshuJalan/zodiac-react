@@ -15,6 +15,7 @@ const PortfolioCard = (props) => {
         .withdrawPayout([["unit"]])
         .send();
       await operation.confirmation();
+      await props.loadMarketShow();
     } catch (err) {
       alert(err);
     }
@@ -48,7 +49,9 @@ const PortfolioCard = (props) => {
           paddingTop: "50px",
         }}
       >
-        No shares available to show.
+        {result === null
+          ? "No shares available to show."
+          : "Market has been closed."}
       </p>
     ) : (
       <></>
@@ -84,7 +87,11 @@ const PortfolioCard = (props) => {
         >
           {loading ? (
             <>
-              <CircularProgress /> CONFIRMING WITHDRAWAL
+              <CircularProgress
+                style={{ color: "#ffffff", marginRight: 10 }}
+                size={20}
+              />
+              CONFIRMING WITHDRAWAL
             </>
           ) : (
             "WITHDRAW PAYOUT"

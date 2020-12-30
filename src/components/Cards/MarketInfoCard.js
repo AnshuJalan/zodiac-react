@@ -17,7 +17,7 @@ const MarketInfoCard = (props) => {
                 display: "block",
                 marginTop: "7px",
               }}
-              href="/"
+              href={props.resolution}
             >
               {props.resolution}
             </a>

@@ -22,6 +22,8 @@ export const loadMarketsAccount = () => async (dispatch, getState) => {
       marketsConfigured.push({
         address: entry[0],
         instance,
+        endTime: new Date(storage.endTime),
+        result: storage.result,
         ...data,
       });
     }

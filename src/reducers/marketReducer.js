@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   market: INITIAL_MARKET,
   marketsAccount: [],
   marketLoading: true,
+  accountLoading: true,
 };
 
 //eslint-disable-next-line
@@ -24,6 +25,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         marketsAccount: action.payload,
+        accountLoading: false,
       };
     case LOAD_MARKET_SHOW:
       return {

@@ -28,7 +28,7 @@ const MarketShow = (props) => {
 
   return (
     <div style={{ justifyContent: "flex-start" }} className="column-flex">
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item sm={12}>
           <MarketInfoCard
             title={title}
@@ -40,7 +40,7 @@ const MarketShow = (props) => {
           <BuySellCard history={history} />
         </Grid>
         <Grid item sm={6}>
-          <PortfolioCard />
+          <PortfolioCard loadMarketShow={loadMarketShow} />
         </Grid>
       </Grid>
     </div>
