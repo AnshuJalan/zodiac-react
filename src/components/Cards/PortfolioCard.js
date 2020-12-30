@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import ShareCard from "./ShareCard";
 
 const PortfolioCard = (props) => {
-  const { sharesLong, sharesShort, result } = props.market;
+  const { sharesLong, sharesShort, result, address } = props.market;
 
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,7 @@ const PortfolioCard = (props) => {
         .withdrawPayout([["unit"]])
         .send();
       await operation.confirmation();
-      await props.loadMarketShow();
+      await props.loadMarketShow(address);
     } catch (err) {
       alert(err);
     }
