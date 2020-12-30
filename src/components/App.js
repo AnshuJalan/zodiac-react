@@ -7,6 +7,7 @@ import LandingPage from "../components/LandingPage";
 import Wallet from "../components/Wallet";
 import MarketsOpen from "./MarketsOpen";
 import MarketCreate from "./MarketCreate";
+import MarketAccount from "./MarketAccount";
 import MainContainer from "./layout/MainContainer";
 import MarketShow from "./MarketShow";
 
@@ -22,7 +23,7 @@ const App = () => {
             <Route exact path="/markets/open" component={MarketsOpen} />
             <Route exact path="/markets/new" component={MarketCreate} />
             <Route exact path="/market/show" component={MarketShow} />
-            <Route exact path="/markets/account" component={Wallet} />
+            <Route exact path="/markets/account" component={MarketAccount} />
             <Route exact path="/wallet" component={Wallet} />
           </Switch>
         </MainContainer>
