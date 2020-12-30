@@ -46,6 +46,7 @@ const MarketCreate = ({
     setLoading(true);
     try {
       const hash = await ipfs.add(JSON.stringify(data));
+      console.log(hash, parseInt(new Date(dateTime) / 1000));
       await createMarket({
         endTime: new Date(dateTime) / 1000,
         ipfsString: hash,
@@ -57,10 +58,14 @@ const MarketCreate = ({
   };
 
   const createMarket = async ({ endTime, ipfsString }) => {
-    const operation = await main.methods
-      .createMarket(endTime, ipfsString)
-      .send({});
-    await operation.confirmation();
+    try {
+      const operation = await main.methods
+        .createMarket(endTime, ipfsString)
+        .send({});
+      await operation.confirmation();
+    } catch (err) {
+      alert(err.message);
+    }
     history.push("/markets/account");
   };
 

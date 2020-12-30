@@ -3,13 +3,6 @@ import { ThanosWallet } from "@thanos-wallet/dapp";
 import IPFS from "nano-ipfs-store";
 
 export const connectWallet = (permission) => async (dispatch) => {
-  if (!ThanosWallet.isAvailable) {
-    alert(
-      "Thanos Wallet not installed! Please install Thanos Wallet to use this dapp"
-    );
-    return;
-  }
-
   const wallet = new ThanosWallet("Dapp Wallet");
   await wallet.connect("delphinet", { forcePermission: permission });
   const tezos = wallet.toTezos();
