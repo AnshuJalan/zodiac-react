@@ -119,7 +119,7 @@ const BuySellCard = (props) => {
       await operation.confirmation();
       props.loadMarketShow(address);
     } catch (err) {
-      alert(err.message);
+      console.log(err);
     }
     setLoading(false);
   };

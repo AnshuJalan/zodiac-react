@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { Grid, Card, CardContent, CircularProgress } from "@material-ui/core";
+import { Grid, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 import MarketInfoCard from "./Cards/MarketInfoCard";
 import BuySellCard from "./Cards/BuySellCard";
 import { loadMarketShow } from "../actions";
+import PortfolioCard from "./Cards/PortfolioCard";
 
 const MarketShow = (props) => {
-  const { address } = props.location;
-  const { loadMarketShow, history } = props;
+  const { address, title, resolution } = props.location.market;
+  const { loadMarketShow, history, endTime } = props;
 
   useEffect(() => {
     if (!address) {
@@ -29,10 +30,17 @@ const MarketShow = (props) => {
     <div style={{ justifyContent: "flex-start" }} className="column-flex">
       <Grid container spacing={3}>
         <Grid item sm={12}>
-          <MarketInfoCard />
+          <MarketInfoCard
+            title={title}
+            resolution={resolution}
+            endTime={endTime.toLocaleString()}
+          />
         </Grid>
         <Grid item sm={6}>
           <BuySellCard history={history} />
+        </Grid>
+        <Grid item sm={6}>
+          <PortfolioCard />
         </Grid>
       </Grid>
     </div>
@@ -42,6 +50,7 @@ const MarketShow = (props) => {
 const mapStateToProps = (state) => {
   return {
     marketLoading: state.markets.marketLoading,
+    endTime: state.markets.market.endTime,
   };
 };
 

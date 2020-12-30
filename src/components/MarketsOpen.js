@@ -13,7 +13,7 @@ const OpenMarket = (props) => {
     if (isWalletConnected) {
       if (!main) {
         loadMainContract();
-      } else if (marketsLoading) {
+      } else {
         loadMarkets();
       }
     }

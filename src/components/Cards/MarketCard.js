@@ -49,7 +49,7 @@ const MarketCard = (props) => {
           onClick={() =>
             props.history.push({
               pathname: "/market/show",
-              address,
+              market: props.market,
             })
           }
           className={classes.action}
