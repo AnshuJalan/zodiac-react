@@ -22,9 +22,16 @@ const MarketInfoCard = (props) => {
               {props.resolution}
             </a>
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={4}>
             <p style={pStyle}>ENDING TIME</p>
             <p style={{ marginTop: 7 }}>{props.endTime}</p>
+          </Grid>
+          <Grid item sm={2}>
+            {props.result >= 0 ? (
+              <span style={{ fontWeight: "bold", color: "red" }}>• CLOSED</span>
+            ) : (
+              <span style={{ fontWeight: "bold", color: "green" }}>• OPEN</span>
+            )}
           </Grid>
         </Grid>
       </CardContent>

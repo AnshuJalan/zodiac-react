@@ -8,7 +8,7 @@ import PortfolioCard from "./Cards/PortfolioCard";
 
 const MarketShow = (props) => {
   const { address, title, resolution } = props.location.market;
-  const { loadMarketShow, history, endTime } = props;
+  const { loadMarketShow, history, endTime, result } = props;
 
   useEffect(() => {
     if (!address) {
@@ -34,6 +34,7 @@ const MarketShow = (props) => {
             title={title}
             resolution={resolution}
             endTime={endTime.toLocaleString()}
+            result={result?.toNumber()}
           />
         </Grid>
         <Grid item sm={6}>
@@ -51,6 +52,7 @@ const mapStateToProps = (state) => {
   return {
     marketLoading: state.markets.marketLoading,
     endTime: state.markets.market.endTime,
+    result: state.markets.market.result,
   };
 };
 
