@@ -47,7 +47,7 @@ const MarketCreate = ({
     try {
       const hash = await ipfs.add(JSON.stringify(data));
       await createMarket({
-        endTime: new Date(dateTime) / 1000,
+        endTime: parseInt(new Date(dateTime) / 1000),
         ipfsString: hash,
       });
     } catch (err) {
